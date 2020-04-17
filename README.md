@@ -1,7 +1,7 @@
 # webpacker-pnpm
 
-[![version](https://img.shields.io/gem/v/webpacker-pnpm.svg?label=version&style=flat-square)
-![downloads](https://img.shields.io/gem/dt/webpacker-pnpm.svg?style=flat-square)](https://rubygems.org/gems/webpacker-pnpm)
+![version](https://img.shields.io/gem/v/webpacker-pnpm.svg?label=version&style=flat-square)
+![status](https://img.shields.io/travis/thearchitector/webpacker-pnpm?style=flat-square)
 ![license](https://img.shields.io/badge/license-CC--BY--NC--SA--4.0-green?style=flat-square)
 
 `webpacker-pnpm` replaces Rails' Yarn environment with [pnpm](https://pnpm.js.org/), which is a much smarter, efficient, and faster alternative Node.js package manager. You can read about the philosophy and technology behind `pnpm` in [this convincing blog post](https://www.kochan.io/nodejs/why-should-we-use-pnpm.html) by Zoltan Kochan, but in essence it reduces dependency resolution times and `node_modules` folder sizes to within reasonable ranges.
@@ -11,14 +11,14 @@
 In order to use `webpacker-pnpm`, you must install `pnpm`. The official instructions are [here](https://pnpm.js.org/en/installation), but all they say is to run the following command:
 
 ```sh
-$ curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.s | node
+$ curl -L https://unpkg.com/@pnpm/self-installer | node
 ```
 
 After installing `pnpm`, simply add `webpacker-pnpm` to your app's `Gemfile`. The master branch will always be up to date with the latest public release of Webpacker,
 but you can select whichever version you desire via the `tag` flag in the gem specification.
 
 ```ruby
-gem 'webpacker-pnpm', git: 'git://github.com/thearchitector/webpacker-pnpm.git', submodules: true
+gem 'webpacker-pnpm', github: 'thearchitector/webpacker-pnpm', submodules: true
 ```
 
 ## License

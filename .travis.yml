@@ -8,7 +8,6 @@ rvm:
   - 2.5.5
   - 2.6.5
   - 2.7.0
-  - ruby-head
 cache:
   bundler: true
   npm: false

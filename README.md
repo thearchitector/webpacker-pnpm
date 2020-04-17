@@ -1,6 +1,6 @@
 # webpacker-pnpm
 
-![version](https://img.shields.io/gem/v/webpacker-pnpm.svg?label=version&style=flat-square)
+![version](https://img.shields.io/github/v/release/thearchitector/webpacker-pnpm?label=version&style=flat-square)
 ![status](https://img.shields.io/travis/thearchitector/webpacker-pnpm?style=flat-square)
 ![license](https://img.shields.io/badge/license-CC--BY--NC--SA--4.0-green?style=flat-square)
 

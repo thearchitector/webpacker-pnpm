@@ -51,7 +51,6 @@ Layout/IndentationConsistency:
 # Use tabs
 Layout/IndentationStyle:
   Enabled: true
-  EnforcedStyle: tabs
 
 Layout/SpaceAfterColon:
   Enabled: true

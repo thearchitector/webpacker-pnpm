@@ -31,7 +31,6 @@ Gem::Specification.new do |spec|
 	spec.add_development_dependency "rubocop", "< 0.69"
 	spec.add_development_dependency "rubocop-performance"
 
-
 	spec.files       = `git ls-files`.split("\n")
 	spec.test_files  = `git ls-files -- test/*`.split("\n")
 end

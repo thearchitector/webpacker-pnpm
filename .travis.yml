@@ -1,0 +1,28 @@
+language: ruby
+dist: xenial
+before_install:
+  - gem install rubygems-update && update_rubygems
+  - yes | rvm @global do gem install bundler -v 2.1.4 || true
+rvm:
+  - 2.4.9
+  - 2.5.5
+  - 2.6.5
+  - 2.7.0
+  - ruby-head
+cache:
+  bundler: true
+  npm: false
+  directories:
+    - node_modules
+    - "~/.pnpm-store"
+
+install:
+  - bundle install --jobs 3 --retry 3
+  - nvm install 12
+  - node -v
+  - curl -L https://unpkg.com/@pnpm/self-installer | node
+  - pnpm config set store-dir ~/.pnpm-store
+  - pnpm install --frozen-lockfile
+script:
+  - bundle exec rubocop
+  - bundle exec rake test

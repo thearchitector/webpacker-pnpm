@@ -4,4 +4,4 @@
 /pkg/
 /spec/reports/
 /tmp/
-Gemfile.lock
+/node_modules

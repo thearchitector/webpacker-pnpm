@@ -18,7 +18,7 @@ After installing `pnpm`, simply add `webpacker-pnpm` to your app's `Gemfile`. Th
 but you can select whichever version you desire via the `tag` flag in the gem specification.
 
 ```ruby
-gem 'rugged', git: 'git://github.com/libgit2/rugged.git', submodules: true
+gem 'webpacker-pnpm', git: 'git://github.com/thearchitector/webpacker-pnpm.git', submodules: true
 ```
 
 ## License

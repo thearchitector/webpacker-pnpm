@@ -14,11 +14,10 @@ In order to use `webpacker-pnpm`, you must install `pnpm`. The official instruct
 $ curl -L https://unpkg.com/@pnpm/self-installer | node
 ```
 
-After installing `pnpm`, simply add `webpacker-pnpm` to your app's `Gemfile`. The master branch will always be up to date with the latest public release of Webpacker,
-but you can select whichever version you desire via the `tag` flag in the gem specification.
+After installing `pnpm`, simply add `webpacker-pnpm` to your app's `Gemfile`. New versions of this gem will come out in parallel with official releases of the Webpacker gem. If you need a different version, you can select whichever version you desire via the `tag` flag in the gem line specification.
 
 ```ruby
-gem 'webpacker-pnpm', github: 'thearchitector/webpacker-pnpm', submodules: true
+gem 'webpacker-pnpm', git: 'https://github.com/thearchitector/webpacker-pnpm.git', submodules: true, tag: 'v1.0.0'
 ```
 
 ## License

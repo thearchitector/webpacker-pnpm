@@ -3,9 +3,9 @@
 source "https://rubygems.org"
 gemspec
 
-gem "rails"
-gem "rake", ">= 11.1"
 gem "rack-proxy", require: false
+gem "rails", ">= 5.2"
+gem "rake", ">= 12.3.3"
 gem "semantic_range", require: false
 
 install_if -> { Gem.win_platform? } do
@@ -13,6 +13,6 @@ install_if -> { Gem.win_platform? } do
 end
 
 group :test do
-  gem "minitest", "~> 5.0"
   gem "byebug"
+  gem "minitest", ">= 5"
 end

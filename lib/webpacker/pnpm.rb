@@ -12,11 +12,11 @@ module Webpacker
     ENV["WEBPACKER_NODE_MODULES_BIN_PATH"] ||= File.join(`pnpm root`.chomp, ".bin")
 
     Rails::Engine.class_eval do
-      alias :unfiltered_tasks :load_tasks
+      alias_method :unfiltered_tasks, :load_tasks
 
       # hook into generic task loading to remove special yarn install task
-      def load_tasks(app = self)
-        unfiltered_tasks()
+      def load_tasks(_app = self)
+        unfiltered_tasks
         Rake::Task["yarn:install"].clear
       end
 
@@ -32,9 +32,7 @@ module Webpacker
 
         paths["lib/tasks"].existent.sort.each do |ext|
           # do not load if its a default webpacker task
-          unless ext.include?("webpacker") && !ext.include?("pnpm")
-            load(ext)
-          end
+          load(ext) unless ext.include?("webpacker") && !ext.include?("pnpm")
         end
       end
     end

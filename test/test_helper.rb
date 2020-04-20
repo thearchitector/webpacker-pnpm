@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "minitest/autorun"
 require "rails"
 require "rails/test_help"
 require "byebug"
+require "etc"
 
 require_relative "test_app/config/environment"
 
@@ -11,24 +11,26 @@ Rails.env = "production"
 
 Webpacker.instance = ::Webpacker::Instance.new
 
-class Webpacker::Test < Minitest::Test
-  private
-  def reloaded_config
-    Webpacker.instance.instance_variable_set(:@env, nil)
-    Webpacker.instance.instance_variable_set(:@config, nil)
-    Webpacker.instance.instance_variable_set(:@dev_server, nil)
-    Webpacker.env
-    Webpacker.config
-    Webpacker.dev_server
-  end
+module Webpacker
+  module PNPM
+    class Test < ActiveSupport::TestCase
+      # force test parallelization - this is not about test speed, it is about
+      # maximizing the liklihood of having tests fail by providing isolated
+      # execution threads. manually specify the number of workers, as by default
+      # Rails uses the number of physical, not logical, cores. Additionally,
+      # spawn threads rather than fork processes as Rails' DRb implementation
+      # only supports UNIX systems
+      parallelize(workers: Etc.nprocessors, with: :threads)
 
-  def with_rails_env(env)
-    original = Rails.env
-    Rails.env = ActiveSupport::StringInquirer.new(env)
-    reloaded_config
-    yield
-  ensure
-    Rails.env = ActiveSupport::StringInquirer.new(original)
-    reloaded_config
+      private
+
+      # concurrent scoped chdir calls are not supported, as they
+      # can cause unforseen and unpredictable bugs. instead, use
+      # interpolated backticks, as they spawn sub-processes and thus
+      # are effectively scoped
+      def chdir_cmd(dir, cmd)
+        `cd #{dir} && #{cmd}`
+      end
+    end
   end
 end

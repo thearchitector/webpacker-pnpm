@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require "action_controller/railtie"
 require "action_view/railtie"
 require "webpacker"
-require "webpacker-pnpm"
+require "webpacker/pnpm"
 
 module TestApp
   class Application < ::Rails::Application
     config.secret_key_base = "abcdef"
     config.eager_load = true
-    config.active_support.test_order = :sorted
+    config.active_support.bare = true
   end
 end

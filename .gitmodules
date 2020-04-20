@@ -1,4 +1,3 @@
 [submodule "lib/webpacker/internal"]
 	path = lib/webpacker/internal
 	url = https://github.com/thearchitector/webpacker.git
-	branch = v5.0.1

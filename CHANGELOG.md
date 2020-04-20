@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog (<https://keepachangelog.com/en/1.0.0/>). This project adheres to Semantic Versioning (<https://semver.org/spec/v2.0.0.html>).
 
+## [v1.1.0] - 2020-04-19
+
+### Changed
+
+- RuboCop formatting rules to more align with Rails' style guide.
+- TypeScript installation tasks based on Webpacker v5.1.0.
+- Rake tasks to extend ActiveSupport and utilize concurrent threading.
+
 ## [v1.0.0] - 2020-04-17
 
 ### Added

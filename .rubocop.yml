@@ -6,29 +6,29 @@ AllCops:
 
 # disable length length checking, as it tends to make things worse in the majority
 # of cases. however, it is good practice keep lines <= 85 columns so they remain
-# readable
+# readable.
 Layout/LineLength:
   Enabled: false
 
 # disable documentation checking. many classes do not require top-level comments,
-# and their inclusion can actually obscure their function
+# and their inclusion can actually obscure their function.
 Style/Documentation:
   Enabled: false
 
 # functionalization is important, but the Rails' idiom for returning key-value
 # maps can raise a false alarm with the max line number (10). increase the value
-# to something more reasonable given the circumstances
+# to something more reasonable given the circumstances.
 Metrics/MethodLength:
   Max: 20
   ExcludedMethods:
     - test_rake_tasks
 
-# if you're specifying access modifiers, it is likely intentional. force rubocop
-# to trust your decision making
+# if you're specifying access modifiers, it is likely intentional. force RuboCop
+# to trust your decision making.
 Lint/UselessAccessModifier:
   Enabled: false
 
-# flag potential memory leaks, like when opening a file
+# flag potential memory leaks, like when opening a file.
 Style/AutoResourceCleanup:
   Enabled: true
 
@@ -45,13 +45,20 @@ Style/StringLiterals:
 
 # flags methods that violate the default ABC magnitude (15). The ABC metric
 # quantizes the size of a method, and is calculated based on the number of
-# assignment operations, possible execution branches, and number of conditionals
+# assignment operations, possible execution branches, and number of conditionals.
 #
 # https://en.wikipedia.org/wiki/ABC_Software_Metric
 Metrics/AbcSize:
   Enabled: true
   IgnoredMethods:
     - test_rake_tasks
+
+# this simply doesn't work in a cross-platform development environment. Bit
+# flags across UNIX and Windows platforms are volatile, and thus there is no
+# way to ensure this passes besides explicitly granting execute permissions
+# in CI config (which would defeat the purpose).
+Lint/ScriptPermission:
+  Enabled: false
 
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true

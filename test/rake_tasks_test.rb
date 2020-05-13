@@ -7,9 +7,6 @@ module Webpacker
     class RakeTasksTest < Test
       def test_rake_tasks
         output = chdir_cmd(test_app_path, "bundle exec rake --tasks")
-        assert_not_includes output, "webpacker:check_yarn"
-        assert_not_includes output, "webpacker:yarn_install"
-        assert_not_includes output, "yarn:install"
         assert_includes output, "webpacker"
         assert_includes output, "webpacker:binstubs"
         assert_includes output, "webpacker:check_binstubs"
@@ -31,44 +28,61 @@ module Webpacker
         assert_includes output, "webpacker:install:vue"
         assert_includes output, "webpacker:pnpm_install"
         assert_includes output, "webpacker:verify_install"
-      end
 
-      def test_check_binstubs
-        output = chdir_cmd(test_app_path, "rake webpacker:check_binstubs 2>&1")
-        assert_not_includes output, "Webpack binstubs not found."
-      end
-
-      def test_check_node_version
-        output = chdir_cmd(test_app_path, "rake webpacker:check_node 2>&1")
-        assert_not_includes output, "Node.js is not installed"
-        assert_not_includes output, "Webpacker requires Node.js"
+        assert_not_includes output, "webpacker:check_yarn"
+        assert_not_includes output, "webpacker:yarn_install"
+        assert_not_includes output, "yarn:install"
       end
 
       def test_check_pnpm_version
         output = chdir_cmd(test_app_path, "rake webpacker:check_pnpm 2>&1")
         assert_not_includes output, "pnpm is not installed"
         assert_not_includes output, "Webpacker requires pnpm"
+
+        assert_includes output, "Verifying pnpm version..."
       end
 
-      # cannot be different methods since they cannot run in parallel
-      # (they both modify the working directory and would cause race conditions)
-      #
+      def test_override_check_yarn_version
+        output = chdir_cmd(test_app_path, "rake webpacker:check_yarn 2>&1")
+        assert_not_includes output, "pnpm is not installed"
+        assert_not_includes output, "Webpacker requires pnpm"
+
+        assert_includes output, "Verifying pnpm version..."
+      end
+
       # TODO: figure out a nice way to avoid doing putting everything in the same
-      # method
-      def test_rake_webpacker_pnpm_install_in_environments
+      # method. they cannot be different methods since they cannot run in parallel
+      # (all methods affect the filesystem)
+      def test_pnpm_install_in_environments
         assert_includes test_app_dev_dependencies, "right-pad"
 
         Webpacker.with_node_env("test") do
           chdir_cmd(test_app_path, "bundle exec rake webpacker:pnpm_install")
-        end
 
-        assert_includes installed_node_module_names, "right-pad", "Expected dev dependencies to be installed"
+          assert_includes installed_node_module_names, "right-pad", "Expected dev dependencies to be installed"
+        end
 
         Webpacker.with_node_env("production") do
           chdir_cmd(test_app_path, "bundle exec rake webpacker:pnpm_install")
+
+          assert_not_includes installed_node_module_names, "right-pad", "Expected only production dependencies to be installed"
         end
 
-        assert_not_includes installed_node_module_names, "right-pad", "Expected only production dependencies to be installed"
+        ##
+        ## OVERRIDES
+        ##
+
+        Webpacker.with_node_env("test") do
+          chdir_cmd(test_app_path, "bundle exec rake webpacker:yarn_install")
+
+          assert_includes installed_node_module_names, "right-pad", "Expected dev dependencies to be installed"
+        end
+
+        Webpacker.with_node_env("production") do
+          chdir_cmd(test_app_path, "bundle exec rake webpacker:yarn_install")
+
+          assert_not_includes installed_node_module_names, "right-pad", "Expected only production dependencies to be installed"
+        end
       end
 
       private

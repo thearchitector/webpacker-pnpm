@@ -52,6 +52,7 @@ Metrics/AbcSize:
   Enabled: true
   IgnoredMethods:
     - test_rake_tasks
+    - test_pnpm_install_in_environments
 
 # this simply doesn't work in a cross-platform development environment. Bit
 # flags across UNIX and Windows platforms are volatile, and thus there is no
@@ -79,4 +80,10 @@ Style/HashTransformKeys:
   Enabled: true
 
 Style/HashTransformValues:
+  Enabled: true
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Style/SlicingWithRange:
   Enabled: true

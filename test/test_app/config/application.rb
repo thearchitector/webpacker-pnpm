@@ -9,6 +9,5 @@ module TestApp
   class Application < ::Rails::Application
     config.secret_key_base = "abcdef"
     config.eager_load = true
-    config.active_support.bare = true
   end
 end

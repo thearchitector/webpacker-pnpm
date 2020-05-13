@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog (<https://keepachangelog.com/en/1.0.0/>). This project adheres to Semantic Versioning (<https://semver.org/spec/v2.0.0.html>).
 
+## [v1.2.0] - 2020-05-13
+
+### Added
+
+- Compatibility with Rails' Template API via command execution hooks and keyword substitution.
+- Support for existing Yarn Rake task dependence through task aliasing and redirection.
+- Additional Rake tasks to test injection and interception logic.
+
+### Changed
+
+- Gem dependencies to reflect up-to-date versions.
+- RuboCop formatting rules to support latest versions of Ruby.
+- Test application structure to allow application booting.
+
+### Removed
+
+- Webpacker git submodule as method for replacing default Rails' rake tasks.
+- Dependence on a specific version of Webpacker.
+
 ## [v1.1.0] - 2020-04-19
 
 ### Changed

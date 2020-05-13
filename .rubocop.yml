@@ -87,3 +87,6 @@ Layout/EmptyLinesAroundAttributeAccessor:
 
 Style/SlicingWithRange:
   Enabled: true
+
+Style/RescueModifier:
+  Enabled: false

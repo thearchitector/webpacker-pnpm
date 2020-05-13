@@ -11,11 +11,7 @@ namespace :webpacker do
       raise Errno::ENOENT if pnpm_version.blank?
 
       pnpm_range = ">=3.0.0"
-      is_unsupported = begin
-                         SemanticRange.satisfies?(pnpm_version, pnpm_range)
-                       rescue StandardError
-                         false
-                       end
+      is_unsupported = SemanticRange.satisfies?(pnpm_version, pnpm_range) rescue false
 
       unless is_unsupported
         warn "Webpacker requires pnpm \"#{pnpm_range}\" and you are using #{pnpm_version}. Please upgrade pnpm https://pnpm.js.org/en/installation/"

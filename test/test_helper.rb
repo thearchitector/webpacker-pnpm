@@ -4,6 +4,8 @@ require "rails"
 require "rails/test_help"
 require "byebug"
 require "etc"
+require "fileutils"
+require "open3"
 
 require_relative "test_app/config/environment"
 
@@ -24,12 +26,38 @@ module Webpacker
 
       private
 
-      # concurrent scoped chdir calls are not supported, as they
-      # can cause unforeseen and unpredictable bugs. instead, use
-      # interpolated backticks, as they spawn sub-processes and thus
-      # are effectively scoped
-      def chdir_cmd(dir, cmd)
-        `cd #{dir} && #{cmd}`
+      # concurrent scoped chdir calls are not supported, as they can cause
+      # unforeseen and unpredictable bugs. instead, allow copying the desired
+      # directory to a temp directory before performing possible filesystem
+      # manipulations. opts are passed through to Open3::capture2e
+      def chdir_concurrent(dir, cmd, env = {}, opts = {})
+        # Process::spawn requires an env hash of strings
+        env.stringify_keys!
+        env.transform_values!(&:to_s)
+
+        # env = ENV.to_h.merge(env)
+        isolated = opts.delete(:isolated)
+        output = nil
+
+        begin
+          # if we're in an isolated environment, copy the directory contents to a
+          # new temporary directory
+          if isolated
+            files = Dir[File.join(dir, "*")].reject do |f|
+              f.include?("node_modules")
+            end
+
+            dir = Dir.mktmpdir
+            FileUtils.cp_r(files, dir)
+          end
+
+          output, = Open3.capture2e(env, "cd #{dir} && #{cmd}", opts)
+          yield(output, dir) if block_given?
+        ensure
+          FileUtils.remove_entry_secure(dir) if isolated
+        end
+
+        output
       end
     end
   end

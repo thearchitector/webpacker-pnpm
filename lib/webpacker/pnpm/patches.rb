@@ -6,22 +6,12 @@ require "webpacker/compiler"
 
 module Webpacker
   module PNPM
-    # hook into Webpacker runner initialization to correctly set the bin directory
-    Webpacker::Runner.class_eval do
-      alias_method :post_initialize, :initialize
-
-      def initialize(argv)
-        ENV["WEBPACKER_NODE_MODULES_BIN_PATH"] ||= File.join(`pnpm root`.chomp, ".bin")
-        post_initialize(argv)
-      end
-    end
-
     # remove Yarn's lockfile from and add pnpm's lockfile to the default list of
     # watched paths
     Webpacker::Compiler.class_eval do
       def default_watched_paths
         [
-          *config.additional_paths_globbed,
+          *config.resolved_paths_globbed,
           config.source_path_globbed,
           "pnpm-lock.yaml", "package.json",
           "config/webpack/**/*"
@@ -55,6 +45,7 @@ module Webpacker
         # that any external code will still run
         Rake::Task["webpacker:check_yarn"].clear.enhance(["webpacker:check_pnpm"])
         Rake::Task["webpacker:yarn_install"].clear.enhance(["webpacker:pnpm_install"])
+        Rake::Task["webpacker:info"].clear.enhance(["webpacker:env"])
         Rake::Task["yarn:install"].clear.enhance(["webpacker:pnpm_install"])
       end
     end

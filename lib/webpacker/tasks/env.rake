@@ -4,7 +4,7 @@ require "webpacker/version"
 
 namespace :webpacker do
   desc "Provide information on Webpacker's environment"
-  task info: [:environment] do
+  task env: [:environment] do
     $stdout.puts "Ruby: #{`ruby --version`}"
     $stdout.puts "Rails: #{Rails.version}"
     $stdout.puts "Webpacker: #{Webpacker::VERSION}"

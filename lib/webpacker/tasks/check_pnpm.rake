@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "semantic_range"
+
 namespace :webpacker do
   desc "Verifies if pnpm is installed"
   task check_pnpm: [:environment] do
@@ -14,13 +15,13 @@ namespace :webpacker do
       is_unsupported = SemanticRange.satisfies?(pnpm_version, pnpm_range) rescue false
 
       unless is_unsupported
-        warn "Webpacker requires pnpm \"#{pnpm_range}\" and you are using #{pnpm_version}. Please upgrade pnpm https://pnpm.js.org/en/installation/"
-        warn "Exiting!"
+        $stderr.puts "Webpacker requires pnpm \"#{pnpm_range}\" and you are using #{pnpm_version}. Please upgrade pnpm https://pnpm.js.org/en/installation/"
+        $stderr.puts "Exiting!"
         exit!
       end
     rescue Errno::ENOENT
-      warn "pnpm is not installed. Please download and install pnpm from https://pnpm.js.org/en/installation/"
-      warn "Exiting!"
+      $stderr.puts "pnpm is not installed. Please download and install pnpm from https://pnpm.js.org/en/installation/"
+      $stderr.puts "Exiting!"
       exit!
     end
   end

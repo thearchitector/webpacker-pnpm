@@ -14,10 +14,16 @@ module Webpacker
         end
       end
 
-      # manually specify bin path to skip Yarn execution during Webpack runner
-      # initialization
+      # manually specify node_modules bin path to skip Yarn execution during
+      # Webpack runner initialization
       config.before_configuration do
-        ENV["WEBPACKER_NODE_MODULES_BIN_PATH"] ||= File.join(`pnpm root`.chomp, ".bin")
+        begin
+          ENV["WEBPACKER_NODE_MODULES_BIN_PATH"] ||= File.join(`pnpm root`.chomp, ".bin")
+        rescue Errno::ENOENT
+          # use abort instead of Rails' logger because it doesn't show up when
+          # run within Rake tasks
+          abort("\e[31m[FATAL] pnpm is not installed or not present in $PATH. Install pnpm and try again.\e[0m\n\n")
+        end
       end
     end
   end

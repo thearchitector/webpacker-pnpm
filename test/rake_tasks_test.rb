@@ -35,7 +35,7 @@ module Webpacker
       end
 
       def test_check_pnpm_version
-        output = chdir_concurrent(test_path, "rake webpacker:check_pnpm 2>&1")
+        output = chdir_concurrent(test_path, "rake webpacker:check_pnpm")
         assert_not_includes output, "pnpm is not installed"
         assert_not_includes output, "Webpacker requires pnpm"
 
@@ -43,7 +43,7 @@ module Webpacker
       end
 
       def test_override_check_yarn_version
-        output = chdir_concurrent(test_path, "rake webpacker:check_yarn 2>&1")
+        output = chdir_concurrent(test_path, "rake webpacker:check_yarn")
         assert_not_includes output, "pnpm is not installed"
         assert_not_includes output, "Webpacker requires pnpm"
 

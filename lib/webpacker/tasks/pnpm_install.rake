@@ -9,6 +9,6 @@ namespace :webpacker do
       valid_node_envs.include?(Rails.env) ? Rails.env : "production"
     end
 
-    system({ "NODE_ENV" => node_env }, "pnpm i --frozen-lockfile")
+    system({ "NODE_ENV" => node_env }, "pnpm install --frozen-lockfile")
   end
 end

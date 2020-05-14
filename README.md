@@ -5,7 +5,9 @@
 [![downloads](https://img.shields.io/gem/dt/webpacker-pnpm?style=flat-square)](https://rubygems.org/gems/webpacker-pnpm)
 [![license](https://img.shields.io/badge/license-CC--BY--NC--SA--4.0-green?style=flat-square)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-`webpacker-pnpm` replaces Rails' Yarn environment with [pnpm](https://pnpm.js.org/), which is a much smarter, efficient, and faster alternative Node.js package manager. You can read about the philosophy and technology behind `pnpm` in [this convincing blog post](https://www.kochan.io/nodejs/why-should-we-use-pnpm.html) by Zoltan Kochan, but in essence it reduces dependency resolution times and `node_modules` folder sizes to within reasonable ranges (not 30 seconds and 10 GiB).
+`webpacker-pnpm` replaces Rails' Yarn environment with [pnpm](https://pnpm.js.org/), a better, smarter, and more efficient Node.js package manager. As a result, applications become less prone to dependency hell, more functional, more stable, and more flexible. And as an added bonus, dependency resolution times and `node_modules` folder sizes reduce to within reasonable ranges (not 45 seconds and 10 GiB).
+
+You can read about the philosophy and technology behind `pnpm` in [this convincing blog post](https://www.kochan.io/nodejs/why-should-we-use-pnpm) by Zoltan Kochan (<https://www.kochan.io/nodejs/why-should-we-use-pnpm>).
 
 ## Features
 

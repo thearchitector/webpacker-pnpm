@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog (<https://keepachangelog.com/en/1.0.0/>). This project adheres to Semantic Versioning (<https://semver.org/spec/v2.0.0.html>).
 
-## [v1.2.0] - 2020-05-13
+## [v1.2.0] - 2020-05-14
 
 ### Added
 
@@ -19,6 +19,8 @@ The format is based on Keep a Changelog (<https://keepachangelog.com/en/1.0.0/>)
 - RuboCop formatting rules to support latest versions of Ruby.
 - Test application structure to allow application booting.
 - Rake task tests to utilize concurrent `chdir` calls.
+- Tests to support Rails <6.x `[bugfix]`.
+- Tests to support Ruby 2.4.9 `[bugfix]`.
 
 ### Removed
 

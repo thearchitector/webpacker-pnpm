@@ -99,7 +99,7 @@ module Webpacker
 
       def installed_node_modules(dir)
         node_modules_path = File.expand_path("node_modules", dir)
-        Dir.children(node_modules_path)
+        Dir.entries(node_modules_path)
       end
     end
   end

@@ -13,6 +13,5 @@ install_if -> { Gem.win_platform? } do
 end
 
 group :test do
-  gem "byebug"
   gem "minitest", ">= 5"
 end

@@ -20,9 +20,10 @@ module Webpacker
       # Rails uses the number of physical, not logical, cores. Additionally,
       # spawn threads rather than fork processes as Rails' DRb implementation
       # only supports UNIX systems
-      parallelize(workers: Etc.nprocessors, with: :threads)
+      Minitest.parallel_executor = Minitest::Parallel::Executor.new(Etc.nprocessors)
+      parallelize_me!
 
-      private
+      protected
 
       # concurrent scoped chdir calls are not supported, as they can cause
       # unforeseen and unpredictable bugs. instead, allow copying the desired

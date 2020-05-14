@@ -11,12 +11,14 @@ The format is based on Keep a Changelog (<https://keepachangelog.com/en/1.0.0/>)
 - Compatibility with Rails' Template API via command execution hooks and keyword substitution.
 - Support for existing Yarn Rake task dependence through task aliasing and redirection.
 - Additional Rake tasks to test injection and interception logic.
+- Utility method for concurrent and scoped `chdir` calls.
 
 ### Changed
 
 - Gem dependencies to reflect up-to-date versions.
 - RuboCop formatting rules to support latest versions of Ruby.
 - Test application structure to allow application booting.
+- Rake task tests to utilize concurrent `chdir` calls.
 
 ### Removed
 

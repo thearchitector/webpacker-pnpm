@@ -2,7 +2,6 @@ require: rubocop-rails
 AllCops:
   Exclude:
     - "node_modules/**/*"
-    - "lib/webpacker/internal/**/*"
 
 # disable length length checking, as it tends to make things worse in the majority
 # of cases. however, it is good practice keep lines <= 85 columns so they remain
@@ -52,7 +51,7 @@ Metrics/AbcSize:
   Enabled: true
   IgnoredMethods:
     - test_rake_tasks
-    - test_pnpm_install_in_environments
+    - chdir_concurrent
 
 # this simply doesn't work in a cross-platform development environment. Bit
 # flags across UNIX and Windows platforms are volatile, and thus there is no

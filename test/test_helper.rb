@@ -2,7 +2,6 @@
 
 require "rails"
 require "rails/test_help"
-require "byebug"
 require "etc"
 require "fileutils"
 require "open3"
@@ -10,7 +9,6 @@ require "open3"
 require_relative "test_app/config/environment"
 
 Rails.env = "production"
-
 Webpacker.instance = ::Webpacker::Instance.new
 
 module Webpacker
@@ -35,13 +33,13 @@ module Webpacker
         env.stringify_keys!
         env.transform_values!(&:to_s)
 
-        # env = ENV.to_h.merge(env)
+        env = ENV.to_h.merge(env)
         isolated = opts.delete(:isolated)
         output = nil
 
         begin
-          # if we're in an isolated environment, copy the directory contents to a
-          # new temporary directory
+          # if we're want an isolated environment, copy the directory contents to
+          # a new temporary directory and change the working directory to it
           if isolated
             files = Dir[File.join(dir, "*")].reject do |f|
               f.include?("node_modules")
@@ -54,6 +52,7 @@ module Webpacker
           output, = Open3.capture2e(env, "cd #{dir} && #{cmd}", opts)
           yield(output, dir) if block_given?
         ensure
+          # make sure we remove the generated temp directory
           FileUtils.remove_entry_secure(dir) if isolated
         end
 

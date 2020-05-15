@@ -6,7 +6,7 @@ require:
 AllCops:
   Exclude:
     - "node_modules/**/*"
-    - "vendor/bundle/**/*"
+    - "gemfiles/**/*" # for travis builds
 
 # disable length length checking, as it tends to make things worse in the majority
 # of cases. however, it is good practice keep lines <= 85 columns so they remain

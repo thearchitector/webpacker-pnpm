@@ -11,7 +11,7 @@ namespace :webpacker do
       pnpm_version = `pnpm --version`.chomp
       raise Errno::ENOENT if pnpm_version.blank?
 
-      pnpm_range = ">=3.0.0"
+      pnpm_range = ">= 3.0.0"
       is_unsupported = SemanticRange.satisfies?(pnpm_version, pnpm_range) rescue false
 
       unless is_unsupported

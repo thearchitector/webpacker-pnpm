@@ -35,6 +35,7 @@ script:
   - bundle exec rake test
 
 jobs:
+  fast_finish: true
   allow_failures:
     - gemfile: gemfiles/Gemfile-rails-edge
     - rvm: ruby-head

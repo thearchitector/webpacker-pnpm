@@ -4,11 +4,13 @@ os:
   - linux
   - osx
 
-before_install:
-  - gem install rubygems-update && update_rubygems
-  - yes | rvm @global do gem install bundler -v 2.1.4 || true
+cache:
+  bundler: true
+  npm: true
+  directories:
+    - "~/.pnpm-store"
 rvm:
-  - 2.4.9
+  - 2.4.10
   - 2.5.5
   - 2.6.5
   - 2.7.0
@@ -17,32 +19,28 @@ gemfile:
   - gemfiles/Gemfile-rails.5.2.x
   - gemfiles/Gemfile-rails.6.0.x
   - gemfiles/Gemfile-rails-edge
-cache:
-  bundler: true
-  npm: false
-  yarn: false
-  directories:
-    - node_modules
-    - "~/.pnpm-store"
 
-install:
-  - bundle install --jobs 3 --retry 3
-  - nvm install 12
-  - node -v
+before_install:
+  - gem install rubygems-update && update_rubygems
+  - yes | rvm @global do gem install bundler -v 2.1.4 || true
+  - nvm use --lts
   - curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.js | node
   - pnpm config set store-dir ~/.pnpm-store
+install:
+  - bundle install --jobs 3 --retry 3 --path vendor/bundle
   - pnpm install --frozen-lockfile
 script:
   - bundle exec rubocop
   - bundle exec rake test
+
 jobs:
   allow_failures:
     - gemfile: gemfiles/Gemfile-rails-edge
     - rvm: ruby-head
   exclude:
-    - rvm: 2.4.9
+    - rvm: 2.4.10
       gemfile: gemfiles/Gemfile-rails-edge
     - rvm: 2.5.5
       gemfile: gemfiles/Gemfile-rails-edge
-    - rvm: 2.4.9
+    - rvm: 2.4.10
       gemfile: gemfiles/Gemfile-rails.6.0.x

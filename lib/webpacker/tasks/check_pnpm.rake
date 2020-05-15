@@ -15,13 +15,13 @@ namespace :webpacker do
       is_unsupported = SemanticRange.satisfies?(pnpm_version, pnpm_range) rescue false
 
       unless is_unsupported
-        $stderr.puts "Webpacker requires pnpm \"#{pnpm_range}\" and you are using #{pnpm_version}. Please upgrade pnpm https://pnpm.js.org/en/installation/"
-        $stderr.puts "Exiting!"
+        warn "Webpacker requires pnpm \"#{pnpm_range}\" and you are using #{pnpm_version}. Please upgrade pnpm https://pnpm.js.org/en/installation/"
+        warn "Exiting!"
         exit!
       end
     rescue Errno::ENOENT
-      $stderr.puts "pnpm is not installed. Please download and install pnpm from https://pnpm.js.org/en/installation/"
-      $stderr.puts "Exiting!"
+      warn "pnpm is not installed. Please download and install pnpm from https://pnpm.js.org/en/installation/"
+      warn "Exiting!"
       exit!
     end
   end

@@ -24,12 +24,11 @@ before_install:
   - gem install rubygems-update && update_rubygems
   - yes | rvm @global do gem install bundler -v 2.1.4 || true
   - nvm install --lts
-  - node -v
   - curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.js | node
-  - pnpm -v
   - pnpm config set store-dir ~/.pnpm-store
+  - bundle config set path 'vendor/bundle'
 install:
-  - bundle install --jobs 3 --retry 3 --path vendor/bundle
+  - bundle install --jobs 3 --retry 3
   - pnpm install --frozen-lockfile
 script:
   - bundle exec rubocop

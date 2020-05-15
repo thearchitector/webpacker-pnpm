@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "webpacker", "~> 5.0"
 
   spec.add_development_dependency "minitest", "~> 5.0"
-  spec.add_development_dependency "rubocop", "~> 0.71"
+  spec.add_development_dependency "rubocop", "~> 0.83.0"
   spec.add_development_dependency "rubocop-minitest", "~> 0.9"
   spec.add_development_dependency "rubocop-performance", "~> 1.3"
   spec.add_development_dependency "rubocop-rails", "~> 2.5"

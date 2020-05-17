@@ -15,6 +15,7 @@ AllCops:
     - "**/node_modules/**/*"
     - "**/db/schema.rb"
     - "**/bin/**/*"
+    - "**/bundle/vendor/**/*"
 
 # force length length checking and auto-correction. this is here to enforce
 # standardization; however, it is good practice keep lines <= 90 columns when

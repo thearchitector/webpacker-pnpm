@@ -3,7 +3,6 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "webpacker/pnpm/version"
-require "active_support/core_ext/string/filters"
 
 Gem::Specification.new do |spec|
   spec.name        = "webpacker-pnpm"
@@ -14,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.license     = "CC-BY-NC-SA-4.0"
 
   spec.summary     = "Replaces Webpacker's Yarn environment with pnpm."
-  spec.description = <<~HEREDOC.squish
+  spec.description = <<~HEREDOC.gsub(/[[:space:]]+/, " ").strip
     webpacker-pnpm minimizes dependency hell, improves code quality stability, and
     reduces node_modules folder sizes by replacing Webpacker's Yarn environment with pnpm.
   HEREDOC

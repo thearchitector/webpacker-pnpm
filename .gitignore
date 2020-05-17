@@ -1,4 +1,6 @@
 /tmp/
-**/*.log
+**/log
 Gemfile.lock
 **/*.gem
+gemfiles/bundle
+.bundle

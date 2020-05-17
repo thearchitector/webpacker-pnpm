@@ -14,7 +14,9 @@ namespace :webpacker do
     $stdout.puts "\n"
     $stdout.puts "@rails/webpacker: \n#{`npm list @rails/webpacker version`}"
 
-    $stdout.puts "Is bin/webpack present?: #{File.exist? 'bin/webpack'}"
-    $stdout.puts "Is bin/webpack-dev-server present?: #{File.exist? 'bin/webpack-dev-server'}"
+    $stdout.puts "Is bin/webpack present?: #{File.exist?("bin/webpack")}"
+    $stdout.puts <<~HEREDOC.squish
+      Is bin/webpack-dev-server present?: #{File.exist?("bin/webpack-dev-server")}
+    HEREDOC
   end
 end

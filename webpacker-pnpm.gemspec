@@ -3,16 +3,21 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "webpacker/pnpm/version"
+require "active_support/core_ext/string/filters"
 
 Gem::Specification.new do |spec|
   spec.name        = "webpacker-pnpm"
   spec.version     = Webpacker::PNPM::VERSION
   spec.author      = "Elias Gabriel"
   spec.email       = "me@eliasfgabriel.com"
-  spec.summary     = "Replaces Webpacker's Yarn environment with pnpm."
-  spec.description = "webpacker-pnpm minimizes dependency hell, improves code quality and stability, and reduces node_modules folder sizes by replacing Webpacker's Yarn environment with pnpm."
   spec.homepage    = "https://github.com/thearchitector/webpacker-pnpm"
   spec.license     = "CC-BY-NC-SA-4.0"
+
+  spec.summary     = "Replaces Webpacker's Yarn environment with pnpm."
+  spec.description = <<~HEREDOC.squish
+    webpacker-pnpm minimizes dependency hell, improves code quality stability, and
+    reduces node_modules folder sizes by replacing Webpacker's Yarn environment with pnpm.
+  HEREDOC
 
   spec.metadata    = {
     "homepage_uri" => spec.homepage,

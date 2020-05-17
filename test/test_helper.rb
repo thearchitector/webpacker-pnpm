@@ -42,16 +42,13 @@ module Webpacker
           # if we're want an isolated environment, copy the directory contents to
           # a new temporary directory and change the working directory to it
           if isolated
-            files = Dir[File.join(dir, "*")].reject do |f|
-              f.include?("node_modules")
-            end
-
+            files = Dir[File.join(dir, "*")].reject { |f| f.include?("node_modules") }
             dir = Dir.mktmpdir
             FileUtils.cp_r(files, dir)
           end
 
           output, = Open3.capture2e(env, "cd #{dir} && #{cmd}", opts)
-          yield(output, dir) if block_given?
+          yield(dir) if block_given?
         ensure
           # make sure we remove the generated temp directory
           FileUtils.remove_entry_secure(dir) if isolated

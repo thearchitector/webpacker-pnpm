@@ -5,8 +5,6 @@ require "rails/railtie"
 module Webpacker
   module PNPM
     class Railtie < Rails::Railtie
-      private
-
       rake_tasks do
         # load all the rake tasks within the `tasks` directory
         Dir[File.join(File.dirname(__FILE__), "../tasks/**/*.rake")].each do |task|
@@ -22,7 +20,12 @@ module Webpacker
         rescue Errno::ENOENT
           # use abort instead of Rails' logger because it doesn't show up when
           # run within Rake tasks
-          abort("\e[31m[FATAL] pnpm is not installed or not present in $PATH. Install pnpm and try again.\e[0m\n\n")
+          abort(
+            <<~HEREDOC.squish
+              \e[31m[FATAL] pnpm is not installed or not present in $PATH.
+              Install pnpm and try again.\e[0m
+            HEREDOC
+          )
         end
       end
     end

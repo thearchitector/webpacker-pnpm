@@ -2,5 +2,5 @@
 **/log
 Gemfile.lock
 **/*.gem
-gemfiles/bundle
+gemfiles/vendor
 .bundle

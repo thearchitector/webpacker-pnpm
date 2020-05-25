@@ -11,10 +11,16 @@ The format is based on Keep a Changelog (<https://keepachangelog.com/en/1.0.0/>)
 - Informative error messages when pnpm is not installed.
 - Pessimistic gem dependency version specifications to avoid installation conflicts.
 - Full-length gem description.
+- Forced shameful hoisting of installed pnpm dependencies via `webpacker:pnpm_install`.
+- Practical Pig development dependency for external RuboCop linting.
 
 ### Changed
 
 - Commented and adjusted RuboCop formatting rules to clarify design decisions.
+
+### Removed
+
+- Testing configs for bleeding-edge Rails.
 
 ## [v1.2.0] - 2020-05-14
 

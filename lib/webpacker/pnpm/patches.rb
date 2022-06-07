@@ -11,11 +11,19 @@ module Webpacker
     Webpacker::Compiler.class_eval do
       def default_watched_paths
         [
-          *config.additional_paths_globbed,
+          *configured_paths
           config.source_path_globbed,
           "pnpm-lock.yaml", "package.json",
           "config/webpack/**/*"
         ].freeze
+      end
+
+      def configured_paths
+        if config.method_defined?(:additional_paths_globbed)
+          config.additional_paths_globbed
+        else
+          config.resolved_paths_globbed
+        end
       end
     end
 

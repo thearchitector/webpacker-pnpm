@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", ">= 5.2"
   spec.add_dependency "rake", ">= 12.3.3"
   spec.add_dependency "semantic_range", "~> 2.3"
-  spec.add_dependency "webpacker", "~> 5.0"
+  spec.add_dependency "webpacker"
 
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "practical-pig", "~> 1.0"

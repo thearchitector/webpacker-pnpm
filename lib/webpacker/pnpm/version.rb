@@ -2,7 +2,7 @@
 
 module Webpacker
   module PNPM
-    VERSION = "1.2.1"
+    VERSION = "1.2.2"
 
     public_constant :VERSION
   end

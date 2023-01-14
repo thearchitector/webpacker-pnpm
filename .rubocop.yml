@@ -1,7 +1,6 @@
 #
-# RuboCop is a Ruby static code analyzer and code formatter that tries to enforce many of
-# the guidelines outlined in the community Ruby and Rails
-# style guides.
+# RuboCop is a Ruby static code analyzer and code formatter that tries to enforce many
+# of the guidelines outlined in the community Ruby and Rails style guides.
 #
 # https://docs.rubocop.org/en/latest/
 # https://rubystyle.guide/
@@ -15,8 +14,8 @@ inherit_mode:
     - IgnoredMethods
     - AllowedMethods
 
-# cop-specific excludes are not inherited for some reason (likely a bug in RuboCop) so we
-# need to manually re-omit the intended files and directories.
+# cop-specific excludes are not inherited for some reason (likely a bug in RuboCop) so
+# we need to manually re-omit the intended files and directories.
 Layout/LineLength:
   Exclude:
     - "**/config/initializers/**/*"

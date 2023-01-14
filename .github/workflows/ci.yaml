@@ -9,27 +9,36 @@ jobs:
       matrix:
         ruby: ['2.4', '2.5', '2.6', '2.7', 'head']
         gemfile: [ '5.2.x', '6.0.x' ]
+        experimental: [false]
+        include:
+          - ruby: 'head'
+            experimental: true
         exclude:
           - ruby: '2.4'
             gemfile: '6.0.x'
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/Gemfile-rails.${{ matrix.gemfile }}
     steps:
     - uses: actions/checkout@v3
-    - uses: ruby/setup-ruby@v1
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
-    - uses: actions/setup-node@v3
+    - name: Setup Node
+      uses: actions/setup-node@v3
       with:
         node-version: 14
-    - uses: pnpm/action-setup@v2
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
       id: pnpm-install
       with:
         version: 7
         run_install: false
-    - id: pnpm-cache
+    - name: Define pnpm cache
+      id: pnpm-cache
       shell: bash
       run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
     - uses: actions/cache@v3

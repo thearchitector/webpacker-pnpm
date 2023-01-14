@@ -19,7 +19,7 @@ module Webpacker
       end
 
       def configured_paths
-        if config.method_defined?(:additional_paths_globbed)
+        if config.respond_to?(:additional_paths_globbed)
           config.additional_paths_globbed
         else
           config.resolved_paths_globbed

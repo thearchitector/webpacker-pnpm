@@ -18,7 +18,7 @@ module Webpacker
       end
 
       def test_check_pnpm_version
-        output = chdir_concurrent(test_path, "rake webpacker:check_pnpm")
+        output = chdir_concurrent(test_path, "bundle exec rake webpacker:check_pnpm")
         assert_not_includes(output, "pnpm is not installed")
         assert_not_includes(output, "Webpacker requires pnpm")
 
@@ -26,7 +26,7 @@ module Webpacker
       end
 
       def test_override_check_yarn_version
-        output = chdir_concurrent(test_path, "rake webpacker:check_yarn")
+        output = chdir_concurrent(test_path, "bundle exec rake webpacker:check_yarn")
         assert_not_includes(output, "pnpm is not installed")
         assert_not_includes(output, "Webpacker requires pnpm")
 
@@ -78,17 +78,20 @@ module Webpacker
       end
 
       def test_asset_precompile
-        output = chdir_concurrent(test_path, "bundle exec rake assets:precompile")
+        cmd = "bundle exec rake assets:precompile"
+        output = chdir_concurrent(test_path, cmd, { "NODE_ENV": "production" },
+                                  { isolated: true })
+
+        assert_includes(output, "Compiling...")
 
         assert_not_includes(output, "Compilation failed:")
-        assert_includes(output, "Compiling...")
-        assert_includes(output, "Compiled all packs in /gem/test/test_app/public/packs")
+        assert_includes(output, "Compiled all packs in")
       end
 
       private
 
       def test_path
-        File.expand_path("test_app", __dir__)
+        File.expand_path(".")
       end
 
       def test_app_dev_dependencies

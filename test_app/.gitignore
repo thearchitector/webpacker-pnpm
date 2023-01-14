@@ -3,4 +3,4 @@ log
 node_modules
 tmp
 
-.pnpm-lock.yaml
+!Gemfile.lock

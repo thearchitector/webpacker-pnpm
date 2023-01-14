@@ -11,7 +11,7 @@ module Webpacker
     Webpacker::Compiler.class_eval do
       def default_watched_paths
         [
-          *configured_paths
+          *configured_paths,
           config.source_path_globbed,
           "pnpm-lock.yaml", "package.json",
           "config/webpack/**/*"

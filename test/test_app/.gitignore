@@ -2,3 +2,5 @@ dist
 log
 node_modules
 tmp
+
+.pnpm-lock.yaml

@@ -16,7 +16,8 @@ module Webpacker
       # Webpack runner initialization
       config.before_configuration do
         begin
-          ENV["WEBPACKER_NODE_MODULES_BIN_PATH"] ||= File.join(`pnpm root`.chomp, ".bin")
+          ENV["WEBPACKER_NODE_MODULES_BIN_PATH"] ||= File.join(`pnpm root`.chomp,
+                                                               ".bin")
         rescue Errno::ENOENT
           # use abort instead of Rails' logger because it doesn't show up when
           # run within Rake tasks

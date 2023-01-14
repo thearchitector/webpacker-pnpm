@@ -77,6 +77,14 @@ module Webpacker
         end
       end
 
+      def test_asset_precompile
+        output = chdir_concurrent(test_path, "bundle exec rake assets:precompile")
+
+        assert_not_includes(output, "Compilation failed:")
+        assert_includes(output, "Compiling...")
+        assert_includes(output, "Compiled all packs in /gem/test/test_app/public/packs")
+      end
+
       private
 
       def test_path

@@ -1,7 +1,4 @@
-/.bundle/
-/coverage/
-/doc/
-/pkg/
-/spec/reports/
-/tmp/
-/node_modules
+dist
+log
+node_modules
+tmp

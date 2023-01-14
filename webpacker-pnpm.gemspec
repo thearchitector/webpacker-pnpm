@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.author      = "Elias Gabriel"
   spec.email       = "me@eliasfgabriel.com"
   spec.homepage    = "https://github.com/thearchitector/webpacker-pnpm"
-  spec.license     = "CC-BY-NC-SA-4.0"
+  spec.license     = "BSD-3-Clause"
 
   spec.summary     = "Replaces Webpacker's Yarn environment with pnpm."
   spec.description = <<~HEREDOC.gsub(/[[:space:]]+/, " ").strip

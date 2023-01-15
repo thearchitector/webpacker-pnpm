@@ -5,7 +5,9 @@
   "license": "CC-BY-NC-SA-4.0",
   "private": true,
   "dependencies": {
-    "left-pad": "^1.2.0"
+    "@rails/webpacker": "^5.4.3",
+    "left-pad": "^1.2.0",
+    "webpack": "^5.75.0"
   },
   "devDependencies": {
     "right-pad": "^1.0.1"

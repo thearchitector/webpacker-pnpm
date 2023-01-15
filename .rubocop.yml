@@ -17,8 +17,27 @@ inherit_mode:
 # cop-specific excludes are not inherited for some reason (likely a bug in RuboCop) so
 # we need to manually re-omit the intended files and directories.
 Layout/LineLength:
+  Max: 88
   Exclude:
     - "**/config/initializers/**/*"
 Style/MethodCallWithArgsParentheses:
   Exclude:
     - "**/Gemfile"
+
+# cops to backfill into practical pig
+Performance/AncestorsInclude:
+  Enabled: false
+Performance/BigDecimalWithNumericArgument:
+  Enabled: true
+Performance/RedundantSortBlock:
+  Enabled: true
+Performance/RedundantStringChars:
+  Enabled: true
+Performance/ReverseFirst:
+  Enabled: true
+Performance/SortReverse:
+  Enabled: true
+Performance/Squeeze:
+  Enabled: true
+Performance/StringInclude:
+  Enabled: true

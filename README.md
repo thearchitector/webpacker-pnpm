@@ -13,18 +13,29 @@ You can read about the philosophy and technology behind `pnpm` in [this convinci
 ## Features
 
 - Production-ready
-- Drop-in seamless replacement for Yarn, no config required
+- Drop-in replacement for Yarn
 - Supports Rails' Template API, including existing templates using Yarn
 - Provides code sanity without the migraines
 - Gives you more disk space
 
 ## Installation
 
-In order to use `webpacker-pnpm`, you must install `pnpm`. The official instructions are [here](https://pnpm.io/installation). After installing `pnpm`, simply add `webpacker-pnpm` to your app's `Gemfile`.
+In order to use `webpacker-pnpm`, you must install `pnpm`. The official instructions are [here](https://pnpm.io/installation).
+
+After installing `pnpm`, first add `webpacker-pnpm` to your app's `Gemfile`.
 
 ```ruby
 gem "webpacker-pnpm"
 ```
+
+Secondly, add the following line to your `./bin/webpack` so it looks like below (the order matters). This step is required as Webpacker spawns a new process isolated from the Rails server (and thus all auto-loaded patches) when compilation happens live.
+
+```ruby
+require "webpacker/webpack_runner"
+require "webpacker/pnpm/patches" if ENV["RAILS_ENV"] != "production"
+```
+
+> _If you know of an automatic way of achieving a similar result, please open an Issue or PR with your suggestion._
 
 ## License
 

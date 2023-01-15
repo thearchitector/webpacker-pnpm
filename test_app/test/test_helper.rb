@@ -6,7 +6,7 @@ require "etc"
 require "fileutils"
 require "open3"
 
-require_relative "test_app/config/environment"
+require_relative "../config/environment"
 
 Rails.env = "production"
 Webpacker.instance = ::Webpacker::Instance.new

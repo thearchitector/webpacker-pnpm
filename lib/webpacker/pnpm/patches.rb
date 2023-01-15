@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require "rails/generators"
-require "webpacker/runner"
 require "webpacker/compiler"
+require "webpacker/webpack_runner"
+require "rails/generators"
+require "rails/engine"
 
 module Webpacker
   module PNPM
@@ -19,10 +20,31 @@ module Webpacker
       end
 
       def configured_paths
-        if config.method_defined?(:additional_paths_globbed)
+        if config.respond_to?(:additional_paths_globbed)
           config.additional_paths_globbed
         else
           config.resolved_paths_globbed
+        end
+      end
+    end
+
+    Webpacker::WebpackRunner.class_eval do
+      def run
+        env = Webpacker::Compiler.env
+        env["WEBPACKER_CONFIG"] = @webpacker_config
+
+        cmd = if node_modules_bin_exist?
+                ["#{@node_modules_bin_path}/webpack"]
+              else
+                ["pnpm", "webpack"]
+              end
+
+        cmd = ["node", "--inspect-brk"] + cmd if @argv.include?("--debug-webpacker")
+
+        cmd += ["--config", @webpack_config] + @argv
+
+        Dir.chdir(@app_path) do
+          Kernel.exec(env, *cmd)
         end
       end
     end

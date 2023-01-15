@@ -1,6 +1,4 @@
-/tmp/
-**/log
+.pnpm-store
+
 Gemfile.lock
-**/*.gem
-gemfiles/vendor
-.bundle
+*.gem

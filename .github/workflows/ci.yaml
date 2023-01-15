@@ -42,9 +42,10 @@ jobs:
         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
           ${{ runner.os }}-pnpm-store-
-    - run: pnpm install --frozen-lockfile
-      working-directory: ./test/test_app
     - name: Check formatting and syntax
       run: bundle exec rubocop
     - name: Run tests
-      run: bundle exec rake test
+      working-directory: ./test_app
+      run: |
+        pnpm i --frozen-lockfile --shamefully-hoist
+        bundle exec rake test

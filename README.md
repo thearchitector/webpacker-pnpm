@@ -20,7 +20,9 @@ You can read about the philosophy and technology behind `pnpm` in [this convinci
 
 ## Installation
 
-In order to use `webpacker-pnpm`, you must install `pnpm`. The official instructions are [here](https://pnpm.io/installation). After installing `pnpm`, first add `webpacker-pnpm` to your app's `Gemfile`.
+In order to use `webpacker-pnpm`, you must install `pnpm`. The official instructions are [here](https://pnpm.io/installation).
+
+After installing `pnpm`, first add `webpacker-pnpm` to your app's `Gemfile`.
 
 ```ruby
 gem "webpacker-pnpm"

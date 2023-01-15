@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "rails/generators"
-require "webpacker/runner"
 require "webpacker/compiler"
 require "webpacker/webpack_runner"
+require "rails/generators"
+require "rails/engine"
 
 module Webpacker
   module PNPM
